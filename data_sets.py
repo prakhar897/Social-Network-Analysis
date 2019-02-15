@@ -39,8 +39,17 @@ def eigenvector_centrality(G):
 	print(unique_degrees)
 	plot(centrality,"Unique Degrees","Count Of Degrees","EigenVector Centrality")
 
+def katz_centrality(G):
+	centrality = nx.katz_centrality(G )
+	for i,v in centrality.items(): 
+    		print (i,round(v,3))
+	#plt.plot(centrality.keys(),centrality.values())
 
-
+def page_rank(G)
+	page_rank=nx.pagerank(G)
+	for i,v in page_rank.items(): 
+    		print (i,round(v,3))#roundoff upto 3 decimal pts.
+	#plt.plot(page_rank.keys(),page_rank.values())
 def main():
 	G = nx.read_edgelist('ego-twitter/out.ego-twitter')
 	#print(nx.info(G))
@@ -49,5 +58,7 @@ def main():
 	degree_centrality(G)
 	normalized_degree_centrality(G)
 	eigenvector_centrality(G)
+	katz_centrality(G)
+	page_rank(G)
 if __name__ == "__main__": 
     main()
