@@ -77,6 +77,18 @@ def page_rank(G,pos):
 	plot(centrality,"Unique Degrees","Count Of Degrees","Page Rank")
 	draw(G, pos,centrality, 'Page Rank')
 
+def local_clustering(G,pos):
+	centrality = nx.clustering(G)
+	unique_degrees = list(sorted(set(centrality)))
+	plot(centrality,"Unique Degrees","Count Of Degrees","Local Clustering")
+	draw(G,pos,centrality, 'Local Clustering')
+
+def values(G):
+	centrality = nx.average_clustering(G)
+	print(centrality)
+	transitivity = nx.transitivity(G)
+	print(transitivity)
+
 if __name__ == "__main__": 
 	G = nx.Graph()
 	for i in range(1,101):
@@ -89,10 +101,10 @@ if __name__ == "__main__":
 		if((nums[0]<=100) & (nums[1]<=100) & (nums[0] != nums[1]) & (G.has_edge(nums[0],nums[1]) == 0)):
 			G.add_edge(nums[0],nums[1])
 
+	pos = nx.spring_layout(G)
 	print(nx.info(G))
 	nx.draw(G)
 	plt.show()
-	pos = nx.spring_layout(G)
 	degree_centrality(G,pos)
 	normalized_degree_centrality(G,pos)
 	eigenvector_centrality(G,pos)
@@ -100,3 +112,5 @@ if __name__ == "__main__":
 	closeness_centrality(G,pos)
 	katz_centrality(G,pos)
 	page_rank(G,pos)
+	local_clustering(G,pos)
+	values(G)
