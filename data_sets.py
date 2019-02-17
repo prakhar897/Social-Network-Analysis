@@ -39,7 +39,7 @@ def degree_centrality(G,pos):
 	plot(all_degrees,"Unique Degrees","Count Of Degrees","Degree_centrality")
 	draw(G, pos, nx.degree_centrality(G), 'Degree Centrality')
 
-def normalized_degree_centrality(G):
+def normalized_degree_centrality(G,pos):
 	global normalized_degrees
 	n = len(all_degrees)
 	v = 1/(n-1)
@@ -47,30 +47,35 @@ def normalized_degree_centrality(G):
 		normalized_degrees.append(v*all_degrees[i])
 	plot(all_degrees,"Unique Degrees","Count Of Degrees","Normalized Degree_centrality")
 
-def eigenvector_centrality(G):
-	centrality = nx.eigenvector_centrality(G).values()
+def eigenvector_centrality(G,pos):
+	centrality = nx.eigenvector_centrality(G)
 	unique_degrees = list(sorted(set(centrality)))
 	plot(centrality,"Unique Degrees","Count Of Degrees","EigenVector Centrality")
+	draw(G, pos,centrality, 'Eigen Vector Centrality')
 
-def betweenness_centrality(G):
+def betweenness_centrality(G,pos):
 	centrality = nx.betweenness_centrality(G);
 	unique_degrees = list(sorted(set(centrality)))
 	plot(centrality,"Unique Degrees","Count Of Degrees","betweenness_centrality")
+	draw(G, pos,centrality, 'Betweenness Centrality')
 
-def closeness_centrality(G):
-	centrality = nx.closeness_centrality(G).values()
+def closeness_centrality(G,pos):
+	centrality = nx.closeness_centrality(G)
 	unique_degrees = list(sorted(set(centrality)))
 	plot(centrality,"Unique Degrees","Count Of Degrees","Closeness Centrality")
+	draw(G, pos,centrality, 'CLoseness Centrality')
 
-def katz_centrality(G):
+def katz_centrality(G,pos):
 	centrality = nx.katz_centrality(G)
 	unique_degrees = list(sorted(set(centrality)))
 	plot(centrality,"Unique Degrees","Count Of Degrees","Katz Centrality")
+	draw(G, pos,centrality, 'Katz Centrality')
 
-def page_rank(G):
+def page_rank(G,pos):
 	centrality=nx.pagerank(G)
 	unique_degrees = list(sorted(set(centrality)))
 	plot(centrality,"Unique Degrees","Count Of Degrees","Page Rank")
+	draw(G, pos,centrality, 'Page Rank')
 
 if __name__ == "__main__": 
 	G = nx.Graph()
@@ -89,8 +94,9 @@ if __name__ == "__main__":
 	plt.show()
 	pos = nx.spring_layout(G)
 	degree_centrality(G,pos)
-	normalized_degree_centrality(G)
-	eigenvector_centrality(G)
-	betweenness_centrality(G)
-	katz_centrality(G)
-	page_rank(G)
+	normalized_degree_centrality(G,pos)
+	eigenvector_centrality(G,pos)
+	betweenness_centrality(G,pos)
+	closeness_centrality(G,pos)
+	katz_centrality(G,pos)
+	page_rank(G,pos)
